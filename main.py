@@ -3,7 +3,7 @@ import sys
 import requests
 
 # Konfiguracja modelu i lokalnego serwera MCP
-MODEL_NAME = 'gemma:7b'  # Uwaga: Jeśli model ignoruje narzędzia, zaleca się użycie nowszego modelu z lepszym wsparciem Tool Calling (np. gemma2, llama3 lub mistral).
+MODEL_NAME = 'gemma4:12b'  # Uwaga: Jeśli model ignoruje narzędzia, zaleca się użycie nowszego modelu z lepszym wsparciem Tool Calling (np. gemma2, llama3 lub mistral).
 MCP_URL = "http://localhost:9113"
 
 # Definicje narzędzi (Tools) wyciągnięte ze specyfikacji mcp-opennutrition
