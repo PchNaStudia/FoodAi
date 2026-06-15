@@ -1,7 +1,7 @@
 # FoodAi
 
 # ollama instalation
-ollama run gemma:7b
+ollama pull gemma4:12b
 pip install ollama
 
 # mcp run
