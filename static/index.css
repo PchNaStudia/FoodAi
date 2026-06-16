@@ -1,0 +1,229 @@
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --primary-color: #3b82f6; /* Modern blue */
+    --accent-color: #1e3a8a;
+    --card-bg: #ffffff;
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 2rem 1rem;
+}
+
+/* Layout Container */
+.container, main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Typography */
+h1, h2, h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 1.8rem; margin-top: 2rem; }
+
+p {
+    margin-bottom: 1.25rem;
+    color: #4a5568; /* Slightly softer black for readability */
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--accent-color);
+}
+
+/* Modern Cards / Sections */
+section, .card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+button, .btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover, .btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+}
+
+
+/* Form Inputs & Select Dropdowns */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit; /* Inherits the modern system font from body */
+    color: var(--text-color);
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1; /* Subtle gray border */
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    outline: none;
+    appearance: none; /* Removes default OS styling, especially for select */
+    margin-bottom: 1.25rem;
+}
+
+/* Custom styling specifically for Select to add a subtle custom dropdown arrow */
+select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+    padding-right: 2.5rem; /* Make room for the arrow */
+}
+
+/* Interactive States for Inputs */
+input[type="text"]:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); /* Soft blue glow */
+}
+
+/* Updated Button Styles with Disabled State */
+button, .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* Button Hover State (Only applies if NOT disabled) */
+button:hover:not(:disabled),
+.btn:hover:not(:disabled) {
+    background-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+/* Button Active State (When clicked) */
+button:active:not(:disabled),
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Button Disabled State */
+button:disabled,
+.btn.disabled, /* inclusion for class-based disabled states */
+[disabled] {
+    background-color: #cbd5e1; /* Dull gray background */
+    color: #94a3b8;            /* Faded text color */
+    cursor: not-allowed;       /* Changes cursor to a universal "no" sign */
+    transform: none !important; /* Prevents bounce effects */
+    box-shadow: none;
+}
+
+/* Container to wrap the file input for custom styling */
+.file-upload-wrapper {
+    position: relative;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+/* Hide the actual ugly native input, but keep it accessible */
+.file-upload-wrapper input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* Create a beautiful pseudo-input box */
+.file-upload-custom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background-color: #ffffff;
+    border: 1px dashed #cbd5e1; /* Dashed border gives a "drop zone" vibe */
+    border-radius: var(--border-radius);
+    color: #64748b;
+    font-size: 1rem;
+    transition: var(--transition);
+    pointer-events: none; /* Let clicks pass through to the real hidden input */
+}
+
+/* The fake button inside our custom box */
+.file-upload-custom::after {
+    content: "Wybierz plik";
+    background-color: #f1f5f9;
+    color: var(--text-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: calc(var(--border-radius) - 2px);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1px solid #e2e8f0;
+    transition: var(--transition);
+}
+
+/* Hover & Focus states */
+.file-upload-wrapperInput:hover + .file-upload-custom,
+.file-upload-wrapper input[type="file"]:focus + .file-upload-custom {
+    border-color: var(--primary-color);
+    background-color: #f8fafc;
+}
+
+.file-upload-wrapper input[type="file"]:hover + .file-upload-custom::after {
+    background-color: #e2e8f0;
+}
