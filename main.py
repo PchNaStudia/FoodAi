@@ -188,7 +188,7 @@ def option_ingredients():
         "Jeśli użytkownik podał miary domowe (np. garść, szklanka), przelicz je na orientacyjną wagę."
     )
     
-    result = query_gemma(user_input=user_input, system_instruction=system_prompt)
+    result = query_gemma(user_input, system_instruction=system_prompt)
     print("\n--- Wynik Analizy (Na Oko) ---")
     print(result)
 
