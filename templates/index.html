@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Asystent Żywieniowy</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/static/index.css">
+</head>
+<body>
+<h1>Asystent Żywieniowy AI</h1>
+<form id="nutriForm">
+    <select id="action">
+        <option value="visual">Oszacuj na oko</option>
+        <option value="specific">Danie gotowe</option>
+        <option value="weekly">Jadłospis na tydzień</option>
+    </select>
+    <input type="text" id="textInput" placeholder="Opisz posiłek lub preferencje">
+    <div class="file-upload-wrapper">
+        <input type="file" id="imageInput"accept="image/*">
+        <div class="file-upload-custom">
+            <span class="file-name">Nie wybrano pliku</span>
+        </div>
+    </div>
+    <button type="submit" id="submitBtn">Analizuj</button>
+</form>
+<div id="result"></div>
+
+<script>
+    const submitBtn = document.getElementById("submitBtn")
+
+    document.getElementById('nutriForm').onsubmit = async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true
+        const formData = new FormData();
+        formData.append('action', document.getElementById('action').value);
+        formData.append('text', document.getElementById('textInput').value);
+        formData.append('image', document.getElementById('imageInput').files[0]);
+
+        const res = await fetch('/api/analyze', { method: 'POST', body: formData });
+        const data = await res.json();
+        document.getElementById('result').innerHTML = marked.parse(data.result);
+        submitBtn.disabled = false
+    };
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+        document.querySelector('.file-name').textContent = e.target.files[0] ? e.target.files[0].name : "Nie wybrano pliku";
+    });
+</script>
+</body>
+</html>
