@@ -30,17 +30,42 @@
 
     document.getElementById('nutriForm').onsubmit = async (e) => {
         e.preventDefault();
-        submitBtn.disabled = true
-        document.getElementById('result').innerHTML = "";
+        const submitBtn = document.getElementById('submitBtn'); // Ensure this is defined
+        submitBtn.disabled = true;
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = "";
+
         const formData = new FormData();
         formData.append('action', document.getElementById('action').value);
         formData.append('text', document.getElementById('textInput').value);
         formData.append('image', document.getElementById('imageInput').files[0]);
 
-        const res = await fetch('/api/analyze', { method: 'POST', body: formData });
-        const data = await res.json();
-        document.getElementById('result').innerHTML = marked.parse(data.result);
-        submitBtn.disabled = false
+        try {
+            const res = await fetch('/api/analyze', { method: 'POST', body: formData });
+
+            if (!res.ok) throw new Error(`Server error: ${res.statusText}`);
+
+            const reader = res.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+
+            let accumulatedText = "";
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                accumulatedText += chunk;
+
+                resultDiv.innerHTML = marked.parse(accumulatedText);
+            }
+        } catch (err) {
+            console.error("Streaming failed:", err);
+            resultDiv.innerHTML = `<span style="color:red;">Error loading analysis.</span>`;
+        } finally {
+            submitBtn.disabled = false;
+        }
     };
     document.getElementById('imageInput').addEventListener('change', function(e) {
         document.querySelector('.file-name').textContent = e.target.files[0] ? e.target.files[0].name : "Nie wybrano pliku";
