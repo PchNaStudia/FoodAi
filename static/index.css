@@ -218,7 +218,7 @@ button:disabled,
 }
 
 /* Hover & Focus states */
-.file-upload-wrapperInput:hover + .file-upload-custom,
+.file-upload-wrapper input[type="file"]:hover + .file-upload-custom,
 .file-upload-wrapper input[type="file"]:focus + .file-upload-custom {
     border-color: var(--primary-color);
     background-color: #f8fafc;
@@ -226,4 +226,77 @@ button:disabled,
 
 .file-upload-wrapper input[type="file"]:hover + .file-upload-custom::after {
     background-color: #e2e8f0;
+}
+
+/* --- Dynamic Markdown Content Styles Inside #result --- */
+#result h1, #result h2, #result h3 {
+    color: var(--accent-color);
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.4rem;
+    border-bottom: 2px solid var(--bg-color); /* Uses schema light gray */
+    padding-bottom: 0.4rem;
+}
+
+#result h1:first-child, #result h2:first-child, #result h3:first-child {
+    margin-top: 0;
+}
+
+#result p {
+    color: var(--text-color); /* Correct schema text color */
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+/* Lists */
+#result ul, #result ol {
+    margin-left: 1.75rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-color);
+}
+
+#result li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+#result strong {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+/* --- Clean Table Layout Linked to Your Schema --- */
+#result table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    background-color: var(--card-bg); /* Schema white */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+#result th, #result td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--bg-color);
+}
+
+#result th {
+    background-color: var(--accent-color); /* Clean contrast layout */
+    color: var(--card-bg); /* High visibility white text on deep blue header */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+/* Faint overlay on alternate rows without introducing hardcoded shades */
+#result tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+#result tr:last-child td {
+    border-bottom: 2px solid var(--accent-color);
 }

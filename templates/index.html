@@ -31,6 +31,7 @@
     document.getElementById('nutriForm').onsubmit = async (e) => {
         e.preventDefault();
         submitBtn.disabled = true
+        document.getElementById('result').innerHTML = "";
         const formData = new FormData();
         formData.append('action', document.getElementById('action').value);
         formData.append('text', document.getElementById('textInput').value);
